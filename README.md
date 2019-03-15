@@ -79,7 +79,7 @@ function. The following table contains some example events that are supported by
 
 ### OSS event format
 When OSS triggers a function, the event context is passed as a parameter. 
-Here is a sample event context you can get when a user uploads an object on OSS:
+Here is a sample event context you can get when a user uploads an object to OSS:
 ```json
 {
   "events": [
@@ -120,32 +120,30 @@ Here is a sample event context you can get when a user uploads an object on OSS:
 ```
 
 ## Steps
-In this sample, you can learn how to connect Object Storage Service (OSS) with Function Compute by using OSS
-triggers. It assumes that you have signed up for Function Compute and OSS.
-
-In this example, a file prefixed with `source/` and stored in the specified OSS bucket can call the resize
-function automatically. This function scales the image and stores the processing result in the `processed/` directory
-of the same bucket. For example, the function processes `source/serverless.png` as `processed/serverless.png`.
+In this tutorial, we will develop a simple demo that automatically resize images when they are uploaded on
+an [OSS bucket](https://www.alibabacloud.com/help/doc-detail/31827.htm#h2-url-1). The images will need to be
+uploaded into a `source/` folder, the function will process it and save it into the `processed/` folder (for example
+the image `source/serverless.png` will be processed into `processed/serverless.png`).
 
 ### Create an OSS bucket
 Before you follow these steps to create an Object Storage Service (OSS) bucket, make sure that you have activated OSS:
 
 1. Log on to the [OSS console](https://oss.console.aliyun.com/).
-2. See ***OSS topic*** [Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm) to create a bucket.
+2.[Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm).
 
-    In this sample, we select the Singapore region, set the name of the OSS bucket to fc-with-oss-trigger, set
+    In this sample, we select the Singapore region, set the name of the OSS bucket to __fc-with-oss-trigger__, set
     __Storage Class__ to __Standard Storage__, and set __ACL__ to __Private__.
 
     >__Note__: The __Storage Class__ and region cannot be changed once a bucket is created.
 
     ![Create OSS bucket](images/fc-create-bucket.png "Create OSS bucket")
 
-3. Click the bucket you created. On the displayed page, click the __Files__ tab, click __Create Directory__, and set
-the directory name to source. Click __OK__.
+3. Click on the bucket you have created. On the displayed page, click on the __Files__ tab, click on __Create Directory__,
+    and set the directory name to `source`. Click on __OK__.
 
     ![Create OSS Folder](images/fc-oss-create-folder.png "Create OSS Folder")
 
-4. In the /source directory, upload an image. In this example, the serverless.png image is uploaded.
+4. In the `/source` directory, upload an image. In this example, the [serverless.png](images/serverless.png) image is uploaded.
 
     ![Upload File to OSS](images/fc-oss-upload-file.png "Upload File to OSS")
 
