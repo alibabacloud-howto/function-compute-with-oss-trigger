@@ -4,7 +4,23 @@ Welcome to this documentation about how to use [Alibaba Cloud Function Compute](
 
 In this sample, you will learn how to connect [Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss) with Function Compute by using OSS triggers. It assumes that you have signed up for Function Compute and OSS.
 
-# Introduction
+## Summary
+
+0. [Introduction](#introduction)
+1. [Function Compute architecture and overall procedure](#function-compute-architecture-and-overall-procedure)
+   0. [Abstract](#abstract)
+   1. [Architecture and procedure](#architecture-and-procedure)
+   2. [OSS events](#oss-events)
+   3. [OSS event format](#oss-event-format)
+2. [Steps](#steps)
+   0. [Create an OSS bucket](#create-an-oss-bucket)
+   1. [Create a function](#create-a-function)
+   2. [Test the function](#test-the-function)
+   3. [Create an OSS trigger](#create-an-oss-trigger)
+   4. [Test the trigger](#test-the-trigger)
+3. [Further reading](#further-reading)
+
+## Introduction
 
 Alibaba Cloud Function Compute is an event-driven and fully-managed compute service. With Function Compute, you can quickly build any type of applications or services without considering management or Operations and Maintenance (O&M). You can complete a set of backend services for processing multimedia data in just few days.
 
@@ -12,14 +28,14 @@ Function Compute integrates different services in an event-driven manner. When t
 
 You can trigger function invocations via events from [OSS](https://www.alibabacloud.com/product/oss), [Log Service](https://www.alibabacloud.com/product/log-service), [API Gateway](https://www.alibabacloud.com/product/api-gateway) or [Table Store](https://www.alibabacloud.com/product/table-store); or invoke functions directly via [the Function Compute SDK and REST API](https://www.alibabacloud.com/help/doc-detail/52878.htm). With these services and features, you can easily build elastic, reliable, and secure applications. For more information about the type of event sources supported by Function Compute, see [Trigger List](https://www.alibabacloud.com/help/doc-detail/74707.htm).
 
-# Function Compute architecture and overall procedure
+## Function Compute architecture and overall procedure
 
-## Abstract
+### Abstract
 Alibaba Cloud Object Storage Service (OSS) allows you to securely store massive amounts of data in the cloud at low costs. With HTTP RESTful APIs, you can easily store and access data on the Internet.
 
 Function Compute integrates seamlessly with OSS. You can configure functions for different types of events so that OSS can automatically call a function after a certain event is detected.
 
-## Architecture and procedure
+### Architecture and procedure
 To build a service in Function Compute, follow these steps:
 
 ![Workflow](images/Workflow.png "Workflow")
@@ -30,7 +46,7 @@ To build a service in Function Compute, follow these steps:
 4. View function execution logs.
 5. View service monitoring and alarming.
 
-## OSS events
+### OSS events
 After an event is detected, OSS encodes the event information into a JSON string and passes it to an event processing function. The following table lists the events that are supported by OSS.
 
 | Event        | Description           | Remarks  |
@@ -49,7 +65,7 @@ After an event is detected, OSS encodes the event information into a JSON string
 | oss:ObjectRemoved:DeleteObjects | A function is triggered after the OSS DeleteObjects API operation deletes multiple objects. | DeleteObjects is used to delete files in batches. |
 | oss:ObjectRemoved:AbortMultipartUpload | A function is triggered after the OSS AbortMultipartUpload API operation stops a Multipart Upload event. | AbortMultipartUpload is used to stop a Multipart Upload event based on the Upload ID that you provide. For more information, see [AbortMultipartUpload](https://www.alibabacloud.com/help/doc-detail/31996.htm). |
 
-## OSS event format
+### OSS event format
 When an OSS event triggers a function to execute, the OSS event format serves as the input parameter event of the function. You can obtain the event information in the code. 
 
 ```json
@@ -91,13 +107,13 @@ When an OSS event triggers a function to execute, the OSS event format serves as
 }
 ```
 
-# Steps
+## Steps
 
 In this sample, you can learn how to connect Object Storage Service (OSS) with Function Compute by using OSS triggers. It assumes that you have signed up for Function Compute and OSS.
 
 In this example, a file prefixed with `source/` and stored in the specified OSS bucket can call the resize function automatically. This function scales the image and stores the processing result in the `processed/` directory of the same bucket. For example, the function processes `source/serverless.png` as `processed/serverless.png`.
 
-## Create OSS bucket
+### Create an OSS bucket
 Before you follow these steps to create an Object Storage Service (OSS) bucket, make sure that you have activated OSS:
 
 1. Log on to the [OSS console](https://oss.console.aliyun.com/).
@@ -118,7 +134,7 @@ Before you follow these steps to create an Object Storage Service (OSS) bucket, 
     ![Upload File to OSS](images/fc-oss-upload-file.png "Upload File to OSS")
 
 
-## Create function
+### Create a function
 >__Note__: Your function and the OSS bucket must be in the same region. For example, if the OSS bucket is in Singapore, set the region of the service to Singapore.
 
 1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
@@ -168,7 +184,7 @@ def resize(event, context):
             new_blob = i.make_blob()
             bucket.put_object(newKey, new_blob)
 ```
-## Test function
+### Test the function
 Before creating a trigger, you can simulate the execution process by triggering an event. In this step, it simulates the execution process of Function Compute when an object in the source/ directory is created in the OSS bucket. You can use this method for debugging and testing.
 
 To test the function in the Function Compute console, follow these steps:
@@ -181,7 +197,7 @@ To test the function in the Function Compute console, follow these steps:
 
 ![Function Compute Invoke Function](images/fc-invoke-function.png "Function Compute Invoke Function")
 
-## Create OSS trigger
+### Create an OSS trigger
 1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
 2. Click __Triggers__ on the code execution page.
 3. Set the trigger type as __Object Storage Service (OSS)__, and select the new bucket.
@@ -194,12 +210,11 @@ To test the function in the Function Compute console, follow these steps:
 
 ![Function Compute Create Trigger](images/fc-create-trigger.png "Function Compute Create Trigger")
 
-## Test trigger
+### Test the trigger
 After the OSS trigger is set, you can test the entire project. You can upload a new image to the corresponding `source/` directory in the Bucket in OSS console, and you find a new resized image of the same name in the `processed/` directory.
 
 ![Function Compute Test Trigger](images/fc-test-trigger.png "Function Compute Test Trigger")
 
-# Further reading
-
-* [help Docments](https://www.alibabacloud.com/help/doc-detail/52895.htm)
-* [OSS API Docments](https://www.alibabacloud.com/help/doc-detail/31947.htm)
+## Further reading
+* [Help documents](https://www.alibabacloud.com/help/doc-detail/52895.htm)
+* [OSS API Documents](https://www.alibabacloud.com/help/doc-detail/31947.htm)
