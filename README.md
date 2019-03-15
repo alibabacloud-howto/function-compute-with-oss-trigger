@@ -2,23 +2,22 @@
 
 Welcome to this documentation about how to use [Alibaba Cloud Function Compute](https://www.alibabacloud.com/product/function-compute) with [OSS triggers](https://www.alibabacloud.com/help/doc-detail/62922.htm).
 
-In this sample, you will learn how to connect [Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss) with Function Compute by using OSS triggers. It assumes that you have signed up for Function Compute and OSS.
-
 ## Summary
 
 0. [Introduction](#introduction)
-1. [Function Compute architecture and overall procedure](#function-compute-architecture-and-overall-procedure)
+1. [Prerequisite](#prerequisite)
+2. [Function Compute architecture and overall procedure](#function-compute-architecture-and-overall-procedure)
    0. [Abstract](#abstract)
    1. [Architecture and procedure](#architecture-and-procedure)
    2. [OSS events](#oss-events)
    3. [OSS event format](#oss-event-format)
-2. [Steps](#steps)
+3. [Steps](#steps)
    0. [Create an OSS bucket](#create-an-oss-bucket)
    1. [Create a function](#create-a-function)
    2. [Test the function](#test-the-function)
    3. [Create an OSS trigger](#create-an-oss-trigger)
    4. [Test the trigger](#test-the-trigger)
-3. [Further reading](#further-reading)
+4. [Further reading](#further-reading)
 
 ## Introduction
 
@@ -27,6 +26,13 @@ Alibaba Cloud Function Compute is an event-driven and fully-managed compute serv
 Function Compute integrates different services in an event-driven manner. When the event source service triggers an event, the associated function is automatically called to process the event.
 
 You can trigger function invocations via events from [OSS](https://www.alibabacloud.com/product/oss), [Log Service](https://www.alibabacloud.com/product/log-service), [API Gateway](https://www.alibabacloud.com/product/api-gateway) or [Table Store](https://www.alibabacloud.com/product/table-store); or invoke functions directly via [the Function Compute SDK and REST API](https://www.alibabacloud.com/help/doc-detail/52878.htm). With these services and features, you can easily build elastic, reliable, and secure applications. For more information about the type of event sources supported by Function Compute, see [Trigger List](https://www.alibabacloud.com/help/doc-detail/74707.htm).
+
+## Prerequisite
+Please [create an Alibaba Cloud account](https://www.alibabacloud.com/help/doc-detail/50482.htm) and
+[obtain an access key id and secret](https://www.alibabacloud.com/help/faq-detail/63482.htm).
+
+You should also visit the [Function Compute console](https://fc.console.aliyun.com) and the
+[OSS one](https://oss.console.aliyun.com) at least once, in order to activate these services.
 
 ## Function Compute architecture and overall procedure
 
