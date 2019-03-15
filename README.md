@@ -25,7 +25,7 @@ Welcome to this tutorial! In this document you will learn about how to use
 
 Alibaba Cloud Function Compute is an event-driven and fully-managed compute service. With Function Compute, you can
 quickly build any type of applications or services without considering management or Operations and Maintenance (O&M).
-You can complete a set of backend services for processing multimedia data in just few days.
+For example you can complete a set of backend services for processing multimedia data in just few days.
 
 Function Compute integrates different services in an event-driven manner. When the event source service triggers an
 event, the associated function is automatically called to process the event.
@@ -53,43 +53,33 @@ Alibaba Cloud Object Storage Service (OSS) allows you to securely store massive 
 costs. With HTTP RESTful APIs, you can easily store and access data on the Internet.
 
 Function Compute integrates seamlessly with OSS. You can configure functions for different types of events so that
-OSS can automatically call a function after a certain event is detected.
+OSS can automatically call a function after a certain event is happening.
 
 ### Architecture and procedure
-To build a service in Function Compute, follow these steps:
+To build a service in Function Compute, we need to follow these steps:
 
 ![Workflow](images/Workflow.png "Workflow")
 
 1. Create a service.
-2. Create a function. Program an application by using function code.
+2. Create a function that encodes the business logic.
 3. Trigger function execution. Use an event to trigger the execution of a function.
 4. View function execution logs.
-5. View service monitoring and alarming.
+5. Monitor the service and create alarms.
 
 ### OSS events
 After an event is detected, OSS encodes the event information into a JSON string and passes it to an event processing
-function. The following table lists the events that are supported by OSS.
+function. The following table contains some example events that are supported by OSS. The full list
+[is available here](https://www.alibabacloud.com/help/doc-detail/62922.htm#h2-oss-events1).
 
 | Event        | Description           | Remarks  |
 | ------------- | ------------- | ----- |
 | oss:ObjectCreated:PutObject      | A function is triggered after the OSS PutObject API operation creates an object. | PutObject is used to upload files. For more information, see [PutObject](https://www.alibabacloud.com/help/doc-detail/31978.htm). |
-| oss:ObjectCreated:PutSymlink     | A function is triggered after the OSS PutSymlink API operation creates an object. |  PutSymlink is used to create a symbolic link that points to the TargetObject on OSS. You can use this symbolic link to access the TargetObject. For more information, see [PutSymlink](https://www.alibabacloud.com/help/doc-detail/45126.htm). |
-| oss:ObjectCreated:PostObject | A function is triggered after the OSS PostObject API operation creates an object. | PostObject is used to upload files to a specific bucket using the HTML form. For more information, see [PostObject](https://www.alibabacloud.com/help/doc-detail/31988.htm). |
-| oss:ObjectCreated:CopyObject | A function is triggered after the OSS CopyObject API operation creates an object. | CopyObject is used to copy an existing object in OSS into another object. For more information, see [CopyObject](https://www.alibabacloud.com/help/doc-detail/31979.htm). |
-| oss:ObjectCreated:InitialMultipartUpload | A function is triggered after the OSS InitialMultipartUpload API operation is executed. | Before you transmit data in Multipart Upload mode, you must call the InitialMultipartUpload API operation to notify OSS to initialize a Multipart Upload event. For more information, see [InitiateMultipartUpload](https://www.alibabacloud.com/help/doc-detail/31992.htm).|
-| oss:ObjectCreated:UploadPart | A function is triggered after the OSS UploadPart API operation is executed. | After a Multipart Upload event is initialized, you can upload data in parts based on the specified object name and Upload ID. For more information, see [UploadPart](https://www.alibabacloud.com/help/doc-detail/31993.htm). |
-| oss:ObjectCreated:UploadPartCopy | A function is triggered after the OSS UploadPartCopy API operation is executed. | UploadPartCopy is used to upload a part by copying data from an existing object. For more information, see [UploadPartCopy](https://www.alibabacloud.com/help/doc-detail/31994.htm). |
-| oss:ObjectCreated:CompleteMultipartUpload | A function is triggered after the OSS CompleteMultipartUpload API operation is executed. | After all data parts are uploaded, you must call the CompleteMultipartUpload API operation to complete the Multipart Upload of the entire file. For more information, see [CompleteMultipartUpload](https://www.alibabacloud.com/help/doc-detail/31995.htm).|
-| oss:ObjectCreated:AppendObject | A function is triggered after the OSS AppendObject API operation is executed. | AppendObject is used to upload files in appending mode. For more information, see [AppendObject](https://www.alibabacloud.com/help/doc-detail/31981.htm). |
 | oss:ObjectCreated:* | A function is triggered after any of the preceding ObjectCreated API operations is executed. | A function is triggered after any of the preceding ObjectCreated API operations is executed. |
 | oss:ObjectRemoved:DeleteObject | A function is triggered after the OSS DeleteObject API operation deletes an object. | DeleteObject is used to delete a certain object. For more information, see [DeleteObject](https://www.alibabacloud.com/help/doc-detail/31982.htm). |
-| oss:ObjectRemoved:DeleteObjects | A function is triggered after the OSS DeleteObjects API operation deletes multiple objects. | DeleteObjects is used to delete files in batches. |
-| oss:ObjectRemoved:AbortMultipartUpload | A function is triggered after the OSS AbortMultipartUpload API operation stops a Multipart Upload event. | AbortMultipartUpload is used to stop a Multipart Upload event based on the Upload ID that you provide. For more information, see [AbortMultipartUpload](https://www.alibabacloud.com/help/doc-detail/31996.htm). |
 
 ### OSS event format
-When an OSS event triggers a function to execute, the OSS event format serves as the input parameter event of the
-function. You can obtain the event information in the code. 
-
+When OSS triggers a function, the event context is passed as a parameter. 
+Here is a sample event context you can get when a user uploads an object on OSS:
 ```json
 {
   "events": [
@@ -130,7 +120,6 @@ function. You can obtain the event information in the code.
 ```
 
 ## Steps
-
 In this sample, you can learn how to connect Object Storage Service (OSS) with Function Compute by using OSS
 triggers. It assumes that you have signed up for Function Compute and OSS.
 
