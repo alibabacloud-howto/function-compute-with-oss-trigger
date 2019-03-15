@@ -4,22 +4,20 @@ Welcome to this documentation about how to use [Alibaba Cloud Function Compute](
 
 ## Summary
 
-0. [Introduction](#introduction)
-1. [Prerequisite](#prerequisite)
-2. [Function Compute architecture and overall procedure](#function-compute-architecture-and-overall-procedure)
-
-   0. [Abstract](#abstract)
-   1. [Architecture and procedure](#architecture-and-procedure)
-   2. [OSS events](#oss-events)
-   3. [OSS event format](#oss-event-format)
-3. [Steps](#steps)
-
-   0. [Create an OSS bucket](#create-an-oss-bucket)
-   1. [Create a function](#create-a-function)
-   2. [Test the function](#test-the-function)
-   3. [Create an OSS trigger](#create-an-oss-trigger)
-   4. [Test the trigger](#test-the-trigger)
-4. [Further reading](#further-reading)
+1. [Introduction](#introduction)
+2. [Prerequisite](#prerequisite)
+3. [Function Compute architecture and overall procedure](#function-compute-architecture-and-overall-procedure)
+    1. [Abstract](#abstract)
+    2. [Architecture and procedure](#architecture-and-procedure)
+    3. [OSS events](#oss-events)
+    4. [OSS event format](#oss-event-format)
+4. [Steps](#steps)
+    1. [Create an OSS bucket](#create-an-oss-bucket)
+    2. [Create a function](#create-a-function)
+    3. [Test the function](#test-the-function)
+    4. [Create an OSS trigger](#create-an-oss-trigger)
+    5. [Test the trigger](#test-the-trigger)
+5. [Further reading](#further-reading)
 
 ## Introduction
 
