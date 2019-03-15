@@ -1,6 +1,8 @@
 # Function compute with OSS trigger
 
-Welcome to this documentation about how to use [Alibaba Cloud Function Compute](https://www.alibabacloud.com/product/function-compute) with [OSS triggers](https://www.alibabacloud.com/help/doc-detail/62922.htm).
+Welcome to this tutorial! In this document you will learn about how to use
+[Alibaba Cloud Function Compute](https://www.alibabacloud.com/product/function-compute) with 
+[OSS](https://www.alibabacloud.com/product/oss) via [OSS triggers](https://www.alibabacloud.com/help/doc-detail/62922.htm).
 
 ## Summary
 
