@@ -269,12 +269,12 @@ To test the function in the Function Compute console, follow these steps:
     ```
 
     > __Note__: don't forget to adapt the bucket name twice if you have chosen a different name than in this demo.
+    
+    ![Function Compute Invoke Function](images/fc-invoke-function.png "Function Compute Invoke Function")
 
 4. Click on "Invoke".
 5. After the function is executed successfully, you can find the `processed` directory in the OSS bucket.
     This directory should contain the "serverless.png" image.
-
-![Function Compute Invoke Function](images/fc-invoke-function.png "Function Compute Invoke Function")
 
 ### Create an OSS trigger
 1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
