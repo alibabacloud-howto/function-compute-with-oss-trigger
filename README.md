@@ -277,29 +277,26 @@ To test the function in the Function Compute console, follow these steps:
     This directory should contain the "serverless.png" image.
 
 ### Create an OSS trigger
-1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
-2. Click __Triggers__ on the code execution page.
-3. Set the trigger type as __Object Storage Service (OSS)__, and select the new bucket.
-4. Select `oss:objectCreated:*` as the trigger event, and __source/__ as the prefix.
+1. Connect to the [Function Compute console](https://fc.console.aliyun.com/) then select your service and function.
+2. Open the "Triggers" tab.
+3. Click on "Create Trigger", set the trigger type as "Object Storage Service (OSS)", set the trigger name to
+     "fc-oss-trigger" and select your bucket.
+4. Select `oss:objectCreated:*` as a trigger event and `source/` as the prefix.
 
     This configuration indicates that the function is triggered immediately when a new object is created with a
-    source/ prefix in the bucket.
-5. In Invocation Role Management, select __Select an existing role__. The system provides a role named
-`AliyunOSSEventNotificationRole` for the OSS trigger, and you can select this role directly as the trigger role.
-    
-    The trigger needs to set a trigger role to authorize the execution of the function. OSS needs to play this
-    role to trigger the function. For more information on permissions, see 
-    [User permissions](https://www.alibabacloud.com/help/doc-detail/52885.htm).
+    `source/` prefix in the bucket.
 
-![Function Compute Create Trigger](images/fc-create-trigger.png "Function Compute Create Trigger")
+5. In "Role Operation", select "Create new role" and click on the "Authorize" button. In the new tab, click on
+    "Confirm Authorization Policy". Back to the "Create Trigger" panel, click on "OK".
 
 ### Test the trigger
-After the OSS trigger is set, you can test the entire project. You can upload a new image to the corresponding
-`source/` directory in the Bucket in OSS console, and you find a new resized image of the same name in the
-`processed/` directory.
+Now that the OSS trigger is configured, we can test the entire demo. Go to the
+[OSS console](https://oss.console.aliyun.com), select your bucket and upload a new image in the `source/` folder.
+
+Once the image uploaded, navigate to the `processed/` directory: your new image should be present and resized.
 
 ![Function Compute Test Trigger](images/fc-test-trigger.png "Function Compute Test Trigger")
 
 ## Further reading
-* [Help documents](https://www.alibabacloud.com/help/doc-detail/52895.htm)
-* [OSS API Documents](https://www.alibabacloud.com/help/doc-detail/31947.htm)
+* [Function Compute documentation](https://www.alibabacloud.com/help/doc-detail/52895.htm)
+* [OSS API documentation](https://www.alibabacloud.com/help/doc-detail/31947.htm)
