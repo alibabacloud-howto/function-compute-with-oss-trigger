@@ -36,8 +36,8 @@ You can trigger function invocations via events from [OSS](https://www.alibabacl
 [Table Store](https://www.alibabacloud.com/product/table-store); or invoke functions directly
 via [the Function Compute SDK and REST API](https://www.alibabacloud.com/help/doc-detail/52878.htm). With these
 services and features, you can easily build elastic, reliable, and secure applications. For more information
-about the type of event sources supported by Function Compute, see
-[Trigger List](https://www.alibabacloud.com/help/doc-detail/74707.htm).
+about the type of event sources supported by Function Compute, please read
+[this document](https://www.alibabacloud.com/help/doc-detail/74707.htm).
 
 ## Prerequisite
 Please [create an Alibaba Cloud account](https://www.alibabacloud.com/help/doc-detail/50482.htm) and
@@ -62,7 +62,7 @@ To build a service in Function Compute, we need to follow these steps:
 
 1. Create a service.
 2. Create a function that encodes the business logic.
-3. Trigger function execution. Use an event to trigger the execution of a function.
+3. Trigger function execution via an event.
 4. View function execution logs.
 5. Monitor the service and create alarms.
 
@@ -122,14 +122,14 @@ Here is a sample event context you can get when a user uploads an object to OSS:
 ## Steps
 In this tutorial, we will develop a simple demo that automatically resize images when they are uploaded on
 an [OSS bucket](https://www.alibabacloud.com/help/doc-detail/31827.htm#h2-url-1). The images will need to be
-uploaded into a `source/` folder, the function will process it and save it into the `processed/` folder (for example
+uploaded into a `source/` folder, the function will process it and save it into a `processed/` folder (for example
 the image `source/serverless.png` will be processed into `processed/serverless.png`).
 
 ### Create an OSS bucket
 Before you follow these steps to create an Object Storage Service (OSS) bucket, make sure that you have activated OSS:
 
 1. Log on to the [OSS console](https://oss.console.aliyun.com/).
-2.[Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm).
+2. [Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm).
 
     In this sample, we select the Singapore region, set the name of the OSS bucket to __fc-with-oss-trigger__, set
     __Storage Class__ to __Standard Storage__, and set __ACL__ to __Private__.
