@@ -193,7 +193,7 @@ the image `source/serverless.png` will be processed into `processed/serverless.p
 import oss2, json
 from wand.image import Image
 
-def resize(event, context):
+def handler(event, context):
     evt = json.loads(event)
     creds = context.credentials
     # Required by OSS SDK
@@ -220,19 +220,59 @@ def resize(event, context):
 ```
 
 ### Test the function
-Before creating a trigger, you can simulate the execution process by triggering an event. In this step, it simulates
-the execution process of Function Compute when an object in the source/ directory is created in the OSS bucket.
+Before creating a trigger, you can simulate the execution process by triggering an event. In this step, we simulate
+the execution process of Function Compute when an object is uploaded into the `source/` directory in the OSS bucket.
 You can use this method for debugging and testing.
 
 To test the function in the Function Compute console, follow these steps:
-1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
-2. On the code execution page, click __Trigger Event__.
-3. Set the trigger __event__ as OSS trigger event.
-4. Click __Invoke__.
-5. After the function is executed successfully, you can find the `processed` directory named under the corresponding
-OSS bucket. This directory contains the serverless.png processed image.
-6. In the __Test Event__ dialog box, select __OSS Template__, and edit your `arn`, `name`, `ownerIdentity`, and `key`
-parameters in the event template accordingly.
+1. Connect to the [Function Compute console](https://fc.console.aliyun.com/) then select your service and function.
+2. Open the code tab and click on the "Event" button.
+3. Write the following event and click on "OK":
+
+    ```json
+    {
+      "events": [
+        {
+          "eventName": "ObjectCreated:PutObject",
+          "eventSource": "acs:oss",
+          "eventTime": "2017-04-21T12:46:37.000Z",
+          "eventVersion": "1.0",
+          "oss": {
+            "bucket": {
+              "arn": "acs:oss:ap-southeast-1:1237050315505689:fc-with-oss-trigger",
+              "name": "fc-with-oss-trigger",
+              "ownerIdentity": "1237050315505689",
+              "virtualBucket": ""
+            },
+            "object": {
+              "deltaSize": 122539,
+              "eTag": "688A7BF4F233DC9C88A80BF985AB7329",
+              "key": "source/serverless.png",
+              "size": 122539
+            },
+            "ossSchemaVersion": "1.0",
+            "ruleId": "9adac8e253828f4f7c0466d941fa3db81161e853"
+          },
+          "region": "ap-southeast-1",
+          "requestParameters": {
+            "sourceIPAddress": "140.205.128.221"
+          },
+          "responseElements": {
+            "requestId": "58F9FF2D3DF792092E12044C"
+          },
+          "userIdentity": {
+            "principalId": "262561392693583141"
+          }
+        }
+      ]
+    }
+    ```
+
+    > __Note__: don't forget to adapt the bucket name twice if you have chosen a different name than in this demo.
+
+4. Click on "Invoke".
+5. After the function is executed successfully, you can find the `processed` directory in the OSS bucket.
+    This directory should contain the "serverless.png" image.
 
 ![Function Compute Invoke Function](images/fc-invoke-function.png "Function Compute Invoke Function")
 
