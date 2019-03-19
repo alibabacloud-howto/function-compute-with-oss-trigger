@@ -126,20 +126,18 @@ uploaded into a `source/` folder, the function will process it and save it into 
 the image `source/serverless.png` will be processed into `processed/serverless.png`).
 
 ### Create an OSS bucket
-Before you follow these steps to create an Object Storage Service (OSS) bucket, make sure that you have activated OSS:
+1. Go to the [OSS console](https://oss.console.aliyun.com/).
+2. [Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm):
 
-1. Log on to the [OSS console](https://oss.console.aliyun.com/).
-2. [Create a bucket](https://www.alibabacloud.com/help/doc-detail/31885.htm).
+    Select the "Singapore" region, set the OSS bucket name to "fc-with-oss-trigger", set
+    the storage class to "Standard Storage" and set ACL to "Private".
 
-    In this sample, we select the Singapore region, set the name of the OSS bucket to __fc-with-oss-trigger__, set
-    __Storage Class__ to __Standard Storage__, and set __ACL__ to __Private__.
-
-    >__Note__: The __Storage Class__ and region cannot be changed once a bucket is created.
+    >__Note__: The storage class and region cannot be changed once a bucket is created.
 
     ![Create OSS bucket](images/fc-create-bucket.png "Create OSS bucket")
 
-3. Click on the bucket you have created. On the displayed page, click on the __Files__ tab, click on __Create Directory__,
-    and set the directory name to `source`. Click on __OK__.
+3. Click on the bucket you have created. On the displayed page, click on the "Files" tab, then "Create Directory",
+    and set the folder name to `source`. Finally, click on "OK".
 
     ![Create OSS Folder](images/fc-oss-create-folder.png "Create OSS Folder")
 
