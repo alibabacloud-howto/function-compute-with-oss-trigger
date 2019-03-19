@@ -15,10 +15,11 @@ Welcome to this tutorial! In this document you will learn about how to use
     4. [OSS event format](#oss-event-format)
 4. [Steps](#steps)
     1. [Create an OSS bucket](#create-an-oss-bucket)
-    2. [Create a function](#create-a-function)
-    3. [Test the function](#test-the-function)
-    4. [Create an OSS trigger](#create-an-oss-trigger)
-    5. [Test the trigger](#test-the-trigger)
+    2. [Create a log project](#create-a-log-project)
+    3. [Create a function](#create-a-function)
+    4. [Test the function](#test-the-function)
+    5. [Create an OSS trigger](#create-an-oss-trigger)
+    6. [Test the trigger](#test-the-trigger)
 5. [Further reading](#further-reading)
 
 ## Introduction
@@ -139,21 +140,32 @@ the image `source/serverless.png` will be processed into `processed/serverless.p
 3. Click on the bucket you have created. On the displayed page, click on the "Files" tab, then "Create Directory",
     and set the folder name to `source`. Finally, click on "OK".
 
-    ![Create OSS Folder](images/fc-oss-create-folder.png "Create OSS Folder")
+    ![Create OSS folder](images/fc-oss-create-folder.png "Create OSS Folder")
 
 4. In the `/source` directory, upload an image. In this example, the [serverless.png](images/serverless.png) image is uploaded.
 
-    ![Upload File to OSS](images/fc-oss-upload-file.png "Upload File to OSS")
+    ![Upload file to OSS](images/fc-oss-upload-file.png "Upload File to OSS")
 
+### Create a log project
+1. Go to the [Log Service console](https://sls.console.aliyun.com/).
+2. Click on the "Create Project" button:
+
+    Set the project name to "fc-with-oss-trigger-demo-log-project" and select the "Singapore" region.
+
+3. A popup should ask you to create a logstore, click on the "Create" button:
+
+    Set the Logstore name to "fc-with-oss-trigger-demo-log-store", leave all the other parameters to their default
+    values and click on the "Confirm" button.
+
+4. A new popup should invite you to open the "Data Import Wizard", just click on the "Cancel" button.
 
 ### Create a function
->__Note__: Your function and the OSS bucket must be in the same region. For example, if the OSS bucket is in
->Singapore, set the region of the service to Singapore.
+>__Note__: your function and the OSS bucket must be in the same region.
 
-1. Log on to the [Function Compute console](https://fc.console.aliyun.com/).
-2. See topic [Service operations](https://www.alibabacloud.com/help/doc-detail/73337.htm) to create a service.
+1. Go to the [Function Compute console](https://fc.console.aliyun.com/).
+2. [Create a service](https://www.alibabacloud.com/help/doc-detail/73337.htm):
   
-    In this example, we select the Singapore region, set the service name to __fc-with-oss-trigger-demo__, select
+    Select the "Singapore" region, set the service name to "fc-with-oss-trigger-demo", select
     the __fc-with-oss-trigger-demo-log__ log project, select the __fc-with-oss-trigger-demo-log-project__ Logstore,
     role operation to Create new role, and system policies to `AliyunOSSFullAccess` and `AliyunLogFullAccess`.
 
