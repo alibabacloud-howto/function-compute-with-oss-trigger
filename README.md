@@ -137,7 +137,7 @@ the image `source/serverless.png` will be processed into `processed/serverless.p
 
     ![Create OSS bucket](images/fc-create-bucket.png "Create OSS bucket")
 
-3. Click on the bucket you have created. On the displayed page, click on the "Files" tab, then "Create Directory",
+3. Click on the bucket you have created. On the displayed page, click on the "Files" tab, then "Create Folder",
     and set the folder name to `source`. Finally, click on "OK".
 
     ![Create OSS folder](images/fc-oss-create-folder.png "Create OSS Folder")
@@ -165,22 +165,28 @@ the image `source/serverless.png` will be processed into `processed/serverless.p
 1. Go to the [Function Compute console](https://fc.console.aliyun.com/).
 2. [Create a service](https://www.alibabacloud.com/help/doc-detail/73337.htm):
   
-    Select the "Singapore" region, set the service name to "fc-with-oss-trigger-demo", select
-    the __fc-with-oss-trigger-demo-log__ log project, select the __fc-with-oss-trigger-demo-log-project__ Logstore,
-    role operation to Create new role, and system policies to `AliyunOSSFullAccess` and `AliyunLogFullAccess`.
+    Select the "Singapore" region, set the service name to "fc-with-oss-trigger-demo", enable advanced settings,
+    select the log project "fc-with-oss-trigger-demo-log-project", select the log store
+    "fc-with-oss-trigger-demo-log-store", select the role operation "Create new role", add the system policies
+    `AliyunOSSFullAccess` and `AliyunLogFullAccess`, then click on the "Authorize" button.
 
     ![Create Function Compute Service](images/fc-create-fc-service.png "Create Function Compute Service")
 
     ![Create Function Compute Service Config](images/fc-create-fc-service-config.png "Create Function Compute Service Config")
 
-3. See topic [Function operations](https://www.alibabacloud.com/help/doc-detail/73338.htm) to create a function.
+3. A new tab should open with the title "Role Templates". Click on the "Confirm Authorization Policy" button.
+
+4. Back to the previous tab, click on "OK" to create the service.
+
+5. [Create a function](https://www.alibabacloud.com/help/doc-detail/73338.htm):
         
-    In this example, we select the __Empty Function__ template, create no triggers, set the function name to
-    __resize__, runtime environment to __Python__, and leave other parameters to their default values.
+    Select the "Empty Function" template, select no trigger type, set the function name to
+    "resize", set the runtime environment to "python2.7", leave other parameters to their default values, click on
+    the "Next" buttons two times and click on "Create".
 
     ![Create Function Compute Function](images/fc-create-function.png "Create Function Compute Function")
 
-4. Edit your function code. In this example, we set the function code as follows.
+6. Replace the function code with the following content and click on "Save":
 
 ```python
 # -*- coding: utf-8 -*-
@@ -212,6 +218,7 @@ def resize(event, context):
             new_blob = i.make_blob()
             bucket.put_object(newKey, new_blob)
 ```
+
 ### Test the function
 Before creating a trigger, you can simulate the execution process by triggering an event. In this step, it simulates
 the execution process of Function Compute when an object in the source/ directory is created in the OSS bucket.
